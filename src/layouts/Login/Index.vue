@@ -1,7 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import LoginFrom from "./LoginFrom.vue";
+</script>
 <template>
   <div class="login_container">
-    <div class="login_view"></div>
+    <div class="login_view">
+      <LoginFrom />
+    </div>
   </div>
 </template>
 
@@ -29,8 +33,9 @@
     background-color: rgba(255, 255, 255, 0.5);
     height: 100%;
     backdrop-filter: blur(20px);
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+    box-shadow: var(--el-box-shadow-lighter);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
