@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
+import { lnLoading, lnHideLoading } from "@/utils/fun";
 
 const ruleFormRef = ref<FormInstance>();
 
@@ -30,12 +31,17 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid: any) => {
     if (valid) {
-      console.log("submit!");
-    } else {
-      console.log("error submit!");
-      return false;
+      onLogin();
     }
   });
+};
+
+const onLogin = () => {
+  lnLoading("登录中...");
+  try {
+  } finally {
+    lnHideLoading();
+  }
 };
 </script>
 <template>
