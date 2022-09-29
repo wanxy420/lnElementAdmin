@@ -1,11 +1,17 @@
 <script lang="ts" setup>
 import HomeMenu from "./HomeLeftMenu/HomeMenu.vue";
 import HomeHeader from "./HomeHeader/HomeHeader.vue";
+import useStore from "@/store";
+
+const { home } = useStore();
 </script>
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside class="layout-item" width="230px">
+      <el-aside
+        class="layout-item"
+        :width="home.leftDrawerOpen ? '68px' : '230px'"
+      >
         <el-card shadow="hover">
           <HomeMenu />
         </el-card>
@@ -49,6 +55,7 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
 }
 
 .layout-item {
+  transition: all 0.5s;
   margin: 4px;
   border-radius: 4px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);

@@ -7,14 +7,19 @@ const { home } = useStore();
 const route = useRoute();
 </script>
 <template>
-  <el-menu router class="el-menu-vertical-demo" :default-active="route.path">
+  <el-menu
+    :collapse="home.leftDrawerOpen"
+    router
+    class="el-menu-vertical-demo"
+    :default-active="route.path"
+  >
     <template v-for="(item, index) in home.leftMenuList" :key="index">
       <MenuItem :itemChildren="item" />
     </template>
   </el-menu>
 </template>
 
-<style lang="less" scoped>
+<style lang="less">
 .el-menu-vertical-demo {
   width: 100%;
   height: 100%;

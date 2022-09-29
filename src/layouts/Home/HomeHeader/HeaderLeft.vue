@@ -1,7 +1,20 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useStore from "@/store";
+
+const { home } = useStore();
+
+const handleClick = () => {
+  home.leftDrawerOpen = !home.leftDrawerOpen;
+};
+</script>
 <template>
-  <el-icon :size="20">
-    <Fold />
+  <el-icon @click="handleClick" :size="20">
+    <Fold
+      :style="{
+        transform: home.leftDrawerOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+        transition: 'all 0.5s',
+      }"
+    />
   </el-icon>
 </template>
 
