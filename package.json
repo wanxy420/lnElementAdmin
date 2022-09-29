@@ -9,8 +9,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/mockjs": "^1.0.7",
     "element-plus": "^2.2.17",
     "less": "^4.1.3",
+    "mockjs": "^1.1.0",
     "vue": "^3.2.37",
     "vue-router": "^4.1.5"
   },
