@@ -10,6 +10,10 @@ const props = defineProps({
 <template>
   <el-sub-menu :index="props.itemChildren?.path">
     <template #title>
+      <component
+        :is="props.itemChildren?.icon"
+        style="width: 1.2em; height: 1.2em; margin-right: 8px"
+      />
       <span>{{ props.itemChildren?.title }}</span>
     </template>
     <slot></slot>

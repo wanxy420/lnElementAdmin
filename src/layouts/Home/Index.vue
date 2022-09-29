@@ -1,16 +1,30 @@
 <script lang="ts" setup>
 import HomeMenu from "./HomeLeftMenu/HomeMenu.vue";
+import HomeHeader from "./HomeHeader/HomeHeader.vue";
 </script>
 <template>
   <div class="common-layout">
     <el-container>
       <el-aside class="layout-item" width="230px">
-        <HomeMenu />
+        <el-card shadow="hover">
+          <HomeMenu />
+        </el-card>
       </el-aside>
       <el-container>
-        <el-header></el-header>
+        <el-header height="50px">
+          <HomeHeader />
+        </el-header>
         <el-main class="layout-item">
-          <router-view />
+          <el-card
+            style="
+              padding: 8px;
+              width: calc(100% - 18px);
+              height: calc(100% - 18px);
+            "
+            shadow="hover"
+          >
+            <router-view />
+          </el-card>
         </el-main>
       </el-container>
     </el-container>
@@ -30,12 +44,33 @@ import HomeMenu from "./HomeLeftMenu/HomeMenu.vue";
 
 .layout-item {
   margin: 4px;
-  background-color: white;
   border-radius: 4px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  border: none;
 }
 
-.el-main,
+.el-main {
+  padding: 0px;
+}
 .el-header {
   padding: 8px;
+}
+
+.el-card {
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.el-main:hover,
+.el-aside:hover {
+  transition: all 500ms;
+  transform: scale(1.003);
+}
+
+::v-deep(.el-card__body) {
+  padding: 0;
 }
 </style>

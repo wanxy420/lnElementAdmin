@@ -11,7 +11,7 @@ let datalist = {
   msg: "获取成功!",
   data: [
     {
-      icon: "home",
+      icon: "Platform",
       name: "homeDashboard",
       path: "/home/dashboard",
       component: "dashboard/index",
