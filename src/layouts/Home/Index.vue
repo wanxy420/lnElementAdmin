@@ -53,11 +53,9 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
   border: none;
 }
 
-.el-main {
-  padding: 0px;
-}
+.el-main,
 .el-header {
-  padding: 8px;
+  padding: 0px;
 }
 
 .el-card {
