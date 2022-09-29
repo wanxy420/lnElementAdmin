@@ -1,15 +1,17 @@
 <script lang="ts" setup>
 import { reactive, ref } from "vue";
 import type { FormInstance } from "element-plus";
-import { lnLoading, lnHideLoading } from "@/utils/fun";
+import { lnLoading, lnHideLoading, lnMessage } from "@/utils/fun";
+import { login } from "@/api/login";
+import { useRouter } from "vue-router";
+import { rmSync } from "fs";
 
 const ruleFormRef = ref<FormInstance>();
-
-const ruleForm = reactive({
+const router = useRouter();
+const ruleForm = reactive<LoginData>({
   username: "",
   password: "",
 });
-
 const rules = reactive({
   username: [
     {
@@ -27,6 +29,7 @@ const rules = reactive({
   ],
 });
 
+// 点击登录按钮后继续校验
 const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return;
   formEl.validate((valid: any) => {
@@ -36,9 +39,18 @@ const submitForm = (formEl: FormInstance | undefined) => {
   });
 };
 
+// 提交登录
 const onLogin = () => {
   lnLoading("登录中...");
   try {
+    login(ruleForm).then((res) => {
+      lnMessage(res.msg, res.code === 200 ? "success" : "warning");
+      if (res.code === 200) {
+        setTimeout(() => {
+          router.push("/home");
+        }, 1000);
+      }
+    });
   } finally {
     lnHideLoading();
   }

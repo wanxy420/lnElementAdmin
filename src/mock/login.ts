@@ -12,4 +12,4 @@ let datalist = {
   data: [] as Array<any>,
 };
 
-Mock.mock("http://127.0.0.1:5173/api/login", "POST", datalist);
+Mock.mock("http://127.0.0.1:5173/api/login", "post", datalist);

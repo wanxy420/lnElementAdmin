@@ -15,6 +15,14 @@ const routes: Array<RouteRecordRaw> = [
       title: "登录",
     },
   },
+  {
+    name: "home",
+    path: "/home",
+    component: () => import("../views/home/index.vue"),
+    meta: {
+      title: "首页",
+    },
+  },
 ];
 
 const router = createRouter({
