@@ -7,7 +7,7 @@ const { home } = useStore();
 const route = useRoute();
 </script>
 <template>
-  <el-menu class="el-menu-vertical-demo" :default-active="route.path">
+  <el-menu router class="el-menu-vertical-demo" :default-active="route.path">
     <template v-for="(item, index) in home.leftMenuList" :key="index">
       <MenuItem :itemChildren="item" />
     </template>
