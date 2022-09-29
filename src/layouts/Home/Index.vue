@@ -23,7 +23,11 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
             "
             shadow="hover"
           >
-            <router-view />
+            <router-view v-slot="{ Component }">
+              <transition name="slide-fade">
+                <component :is="Component" />
+              </transition>
+            </router-view>
           </el-card>
         </el-main>
       </el-container>
@@ -57,8 +61,8 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
 }
 
 .el-card {
-  width: calc(100% - 2px);
-  height: calc(100% - 2px);
+  width: 100%;
+  height: 100%;
   margin: 0;
   padding: 0;
   border: none;
@@ -66,8 +70,8 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
 
 .el-main:hover,
 .el-aside:hover {
-  transition: all 500ms;
-  transform: scale(1.003);
+  transition: all 0.5s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
 }
 
 ::v-deep(.el-card__body) {

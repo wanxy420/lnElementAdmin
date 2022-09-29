@@ -17,27 +17,27 @@ let datalist = {
       component: "dashboard/index",
       title: "仪表盘",
     },
-    // {
-    //   icon: "home",
-    //   name: "pageManage",
-    //   path: "/home/pageManage",
-    //   component: "",
-    //   title: "页面管理",
-    //   children: [
-    //     {
-    //       name: "pageManageTable",
-    //       path: "/home/pageManage/table",
-    //       component: "pageManage/table/index",
-    //       title: "基础表格",
-    //     },
-    //     {
-    //       name: "pageManageForm",
-    //       path: "/home/pageManage/form",
-    //       component: "pageManage/form/index",
-    //       title: "基础表单",
-    //     },
-    //   ],
-    // },
+    {
+      icon: "HelpFilled",
+      name: "pageManage",
+      path: "/home/pageManage",
+      component: "",
+      title: "页面管理",
+      children: [
+        {
+          name: "pageManageTable",
+          path: "/home/pageManage/table",
+          component: "pageManage/table/index",
+          title: "基础表格",
+        },
+        {
+          name: "pageManageForm",
+          path: "/home/pageManage/form",
+          component: "pageManage/form/index",
+          title: "基础表单",
+        },
+      ],
+    },
     // {
     //   icon: "home",
     //   name: "level",
