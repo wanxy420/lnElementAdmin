@@ -1,7 +1,28 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { PropType, computed } from "vue";
+import ItemSingle from "./ItemSingle.vue";
+import ItemMultiple from "./ItemMultiple.vue";
+
+const props = defineProps({
+  itemChildren: {
+    type: Object as PropType<menuType>,
+  },
+});
+
+const componentId = computed(() => {
+  if (props.itemChildren?.children) {
+    return ItemMultiple;
+  } else {
+    return ItemSingle;
+  }
+});
+</script>
 <template>
-  <el-menu-item index="4">
-    <el-icon><setting /></el-icon>
-    <span>Navigator Four</span>
-  </el-menu-item>
+  <component :is="componentId" :itemChildren="props.itemChildren">
+    <MenuItem
+      v-for="(item, index) in props.itemChildren?.children"
+      :key="index"
+      :itemChildren="item"
+    />
+  </component>
 </template>

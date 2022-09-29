@@ -6,15 +6,6 @@ import useStore from "@/store";
 
 const viteComponent = import.meta.glob("../views/**/*.vue");
 
-interface routerData {
-  name: string;
-  path: string;
-  component: string;
-  title: string;
-  icon?: string;
-  children?: Array<routerData>;
-}
-
 NProgress.configure({
   easing: "ease",
   speed: 500,
@@ -66,7 +57,6 @@ const getRouters = () => {
       // 处理路由数据
       const { home } = useStore();
       home.leftMenuList = res.data;
-      debugger;
       let data = handlerRouterDate(res.data);
       // 添加路由
       data.forEach((item: any) => {

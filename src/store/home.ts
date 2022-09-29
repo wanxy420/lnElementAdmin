@@ -12,14 +12,6 @@ interface tabsType {
   title: string;
 }
 
-interface menuType {
-  path: string;
-  title: string;
-  icon?: string;
-  component?: string;
-  children?: Array<menuType>;
-}
-
 const storeHome = defineStore("home", {
   state: () =>
     <homeType>{

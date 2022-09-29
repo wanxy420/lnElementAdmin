@@ -8,7 +8,10 @@ const props = defineProps({
 });
 </script>
 <template>
-  <el-menu-item :index="props.itemChildren?.path">
-    <span>{{ props.itemChildren?.title }}</span>
-  </el-menu-item>
+  <el-sub-menu :index="props.itemChildren?.path">
+    <template #title>
+      <span>{{ props.itemChildren?.title }}</span>
+    </template>
+    <slot></slot>
+  </el-sub-menu>
 </template>
