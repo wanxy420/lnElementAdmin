@@ -1,4 +1,37 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { watch } from "vue";
+import useStore from "./store";
+import { useRoute, useRouter } from "vue-router";
+
+const { home, config } = useStore();
+const route = useRoute();
+
+watch(
+  () => route.path,
+  () => {
+    if (route.meta.isTabs) {
+      if (!(home.headerTabsList.findIndex((x) => x.path === route.path) >= 0)) {
+        home.headerTabsList.push({
+          path: route.path,
+          title: route.meta.title as string,
+        });
+      }
+    }
+  },
+  {
+    deep: true,
+    immediate: true,
+  }
+);
+
+window.addEventListener("resize", () => {
+  if (document.body.clientWidth > 750) {
+    config.isMobile = false;
+  } else {
+    config.isMobile = true;
+  }
+});
+</script>
 
 <template>
   <router-view v-slot="{ Component }">

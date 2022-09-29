@@ -12,6 +12,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/login",
     component: () => import("../views/login/index.vue"),
     meta: {
+      isTabs: false,
       title: "登录",
     },
   },
@@ -20,6 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     path: "/home",
     component: () => import("../views/home/index.vue"),
     meta: {
+      isTabs: false,
       title: "首页",
     },
   },

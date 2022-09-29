@@ -24,9 +24,11 @@ import HomeHeader from "./HomeHeader/HomeHeader.vue";
             shadow="hover"
           >
             <router-view v-slot="{ Component }">
-              <transition name="slide-fade">
-                <component :is="Component" />
-              </transition>
+              <keep-alive>
+                <transition name="slide-fade">
+                  <component :is="Component" :key="$route.name" />
+                </transition>
+              </keep-alive>
             </router-view>
           </el-card>
         </el-main>
