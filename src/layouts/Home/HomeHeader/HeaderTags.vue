@@ -27,6 +27,7 @@ const handleClick = (path: string) => {
     class="mx-1"
     size="large"
     closable
+    effect="dark"
     :key="index"
     :type="item.path === route.path ? '' : 'info'"
     @click="handleClick(item.path)"
