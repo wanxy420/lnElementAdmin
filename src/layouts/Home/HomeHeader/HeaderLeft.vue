@@ -30,4 +30,8 @@ const handleClick = () => {
   border-radius: 4px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
 }
+.el-icon:hover {
+  transition: all 0.5s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
+}
 </style>
