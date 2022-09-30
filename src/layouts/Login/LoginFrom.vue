@@ -4,7 +4,6 @@ import type { FormInstance } from "element-plus";
 import { lnLoading, lnHideLoading, lnMessage } from "@/utils/fun";
 import { login } from "@/api/login";
 import { useRouter } from "vue-router";
-import { rmSync } from "fs";
 
 const ruleFormRef = ref<FormInstance>();
 const router = useRouter();

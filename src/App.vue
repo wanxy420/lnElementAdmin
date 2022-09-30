@@ -1,7 +1,8 @@
 <script lang="ts" setup>
 import { watch } from "vue";
 import useStore from "./store";
-import { useRoute, useRouter } from "vue-router";
+import { useRoute } from "vue-router";
+import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
 const { home, config } = useStore();
 const route = useRoute();
@@ -34,11 +35,13 @@ window.addEventListener("resize", () => {
 </script>
 
 <template>
-  <router-view v-slot="{ Component }">
-    <transition name="slide-fade">
-      <component :is="Component" />
-    </transition>
-  </router-view>
+  <el-config-provider :locale="zhCn">
+    <router-view v-slot="{ Component }">
+      <transition name="slide-fade">
+        <component :is="Component" />
+      </transition>
+    </router-view>
+  </el-config-provider>
 </template>
 
 <style>

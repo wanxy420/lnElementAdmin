@@ -30,11 +30,11 @@ const { home } = useStore();
             shadow="hover"
           >
             <router-view v-slot="{ Component }">
-              <keep-alive>
-                <transition name="slide-fade">
-                  <component :is="Component" :key="$route.name" />
-                </transition>
-              </keep-alive>
+              <!-- <keep-alive> -->
+              <transition name="slide-fade">
+                <component :is="Component" :key="$route.name" />
+              </transition>
+              <!-- </keep-alive> -->
             </router-view>
           </el-card>
         </el-main>

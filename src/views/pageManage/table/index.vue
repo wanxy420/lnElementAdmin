@@ -24,9 +24,33 @@ const tableData = ref([
     address: "No. 189, Grove St, Los Angeles",
   },
 ]);
+const tableColumn = ref<Array<lnTableColumnType>>([
+  {
+    prop: "date",
+    label: "时间",
+  },
+  {
+    prop: "name",
+    label: "名字",
+  },
+  {
+    prop: "address",
+    label: "地址",
+  },
+]);
+const config = ref<lnTableConfig>({
+  isPagination: true,
+  total: 10,
+  page: 1,
+  size: 10,
+});
 </script>
 <template>
   <div>
-    <ln-table :table-data="tableData"></ln-table>
+    <ln-table
+      :table-data="tableData"
+      :table-column="tableColumn"
+      :config="config"
+    ></ln-table>
   </div>
 </template>

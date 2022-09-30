@@ -22,7 +22,7 @@ let datalist = {
       name: "pageManage",
       path: "/home/pageManage",
       component: "",
-      title: "页面管理",
+      title: "基础组件",
       children: [
         {
           name: "pageManageTable",
