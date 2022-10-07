@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import LoginFrom from "./LoginFrom.vue";
+import LoginBackground from "./LoginBackground.vue";
 </script>
 <template>
   <div class="login_container">
+    <LoginBackground />
     <div class="login_view">
       <LoginFrom />
     </div>
