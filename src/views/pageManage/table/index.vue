@@ -46,7 +46,7 @@ const config = ref<lnTableConfig>({
 });
 </script>
 <template>
-  <div>
+  <div class="contant">
     <ln-table
       :table-data="tableData"
       :table-column="tableColumn"
@@ -54,3 +54,10 @@ const config = ref<lnTableConfig>({
     ></ln-table>
   </div>
 </template>
+
+<style lang="less" scoped>
+.contant {
+  width: 100%;
+  height: 100%;
+}
+</style>
