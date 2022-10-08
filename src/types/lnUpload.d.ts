@@ -10,4 +10,7 @@ interface lnUploadConfigType {
 
   // 是否显示上传列表
   showlist?: boolean | undefined;
+
+  // 上传请求方法
+  method?: string | undefined;
 }

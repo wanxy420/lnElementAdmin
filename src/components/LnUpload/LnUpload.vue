@@ -1,35 +1,11 @@
 <script lang="ts" setup>
-import { ref, PropType } from "vue";
+import { PropType } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 import type { UploadProps, UploadUserFile } from "element-plus";
 
-const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
-  console.log(file, uploadFiles);
-};
-
-const handlePreview: UploadProps["onPreview"] = (uploadFile) => {
-  console.log(uploadFile);
-};
-
-const handleExceed: UploadProps["onExceed"] = (files, uploadFiles) => {
-  ElMessage.warning(
-    `The limit is 3, you selected ${files.length} files this time, add up to ${
-      files.length + uploadFiles.length
-    } totally`
-  );
-};
-
-const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
-  return ElMessageBox.confirm(
-    `Cancel the transfert of ${uploadFile.name} ?`
-  ).then(
-    () => true,
-    () => false
-  );
-};
-
 const props = defineProps({
+  // 上传文件绑定值
   modelValue: {
     type: Array<UploadUserFile>,
   },
@@ -49,7 +25,43 @@ const props = defineProps({
   data: {
     type: Object,
   },
+  // 是否禁用
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
+  console.log(file, uploadFiles);
+};
+// 上传列表某项
+const handlePreview: UploadProps["onPreview"] = (uploadFile) => {
+  /**
+   * 点击列表事件区域
+   */
+};
+const handleExceed: UploadProps["onExceed"] = (files, uploadFiles) => {
+  ElMessage.warning(
+    `The limit is 3, you selected ${files.length} files this time, add up to ${
+      files.length + uploadFiles.length
+    } totally`
+  );
+};
+const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
+  return ElMessageBox.confirm(
+    `Cancel the transfert of ${uploadFile.name} ?`
+  ).then(
+    () => true,
+    () => false
+  );
+};
+// 点击上传文件成功返回
+const onSuccess: UploadProps["onSuccess"] = (
+  response,
+  uploadFile,
+  uploadFiles
+) => {};
 </script>
 <template>
   <el-upload
@@ -65,8 +77,10 @@ const props = defineProps({
     :on-exceed="handleExceed"
     :headers="props?.headers"
     :data="props?.data"
+    :method="props?.config?.method"
+    :disabled="props?.disabled"
   >
-    <slot name="default">
+    <slot>
       <el-button type="primary">点击上传</el-button>
     </slot>
     <template #tip>
