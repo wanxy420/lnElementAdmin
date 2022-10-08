@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import LnTable from "@/components/lnTable/LnTable.vue";
+import LnTable from "@/components/LnTable/LnTable.vue";
 import { ref } from "vue";
 
 // 表格数据
@@ -28,6 +28,10 @@ const tableData = ref([
 // 表格列配置项
 const tableColumn = ref<Array<lnTableColumnType>>([
   {
+    type: "expand",
+    slotName: "expandSlot",
+  },
+  {
     type: "index",
     label: "序号",
     width: 70,
@@ -35,6 +39,12 @@ const tableColumn = ref<Array<lnTableColumnType>>([
   {
     type: "selection",
     width: 70,
+  },
+  {
+    type: "slot",
+    slotName: "dateTags",
+    prop: "date",
+    label: "插槽",
   },
   {
     prop: "date",
@@ -74,7 +84,14 @@ const handleSizeChange = (e: any) => {
       :config="config"
       @handle-current-change="handleCurrentChange"
       @handle-size-change="handleSizeChange"
-    ></ln-table>
+    >
+      <template #dateTags="row">
+        <el-tag>{{ row.row.date }}</el-tag>
+      </template>
+      <template #expandSlot="row">
+        <el-tag>{{ row.row.date }}</el-tag>
+      </template>
+    </ln-table>
   </div>
 </template>
 

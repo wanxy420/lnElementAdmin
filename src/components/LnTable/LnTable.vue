@@ -48,13 +48,18 @@ const select = (selection: any, row: any) => {
           :prop="item.prop"
           :label="item?.label"
           :width="item?.width"
+          :align="item?.align || 'center'"
         >
           <template #default="scope">
             <slot :name="item?.slotName" :row="scope.row"></slot>
           </template>
         </el-table-column>
         <!-- 下拉列 -->
-        <el-table-column v-else-if="item?.type === 'expand'">
+        <el-table-column
+          v-else-if="item?.type === 'expand'"
+          :align="item?.align || 'center'"
+          type="expand"
+        >
           <template #default="scope">
             <slot :name="item?.slotName" :row="scope.row"></slot>
           </template>
@@ -65,6 +70,7 @@ const select = (selection: any, row: any) => {
           type="index"
           :width="item?.width"
           :label="item?.label"
+          :align="item?.align || 'center'"
         />
         <!-- 多选列 -->
         <el-table-column
@@ -72,6 +78,7 @@ const select = (selection: any, row: any) => {
           type="selection"
           :width="item?.width"
           :selectable="item?.selectable"
+          :align="item?.align || 'center'"
         />
         <!-- 其他列 -->
         <el-table-column
@@ -80,6 +87,7 @@ const select = (selection: any, row: any) => {
           :prop="item?.prop"
           :label="item?.label"
           :width="item?.width"
+          :align="item?.align || 'center'"
         />
       </template>
     </el-table>
