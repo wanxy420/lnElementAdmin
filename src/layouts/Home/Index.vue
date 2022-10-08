@@ -12,31 +12,20 @@ const { home } = useStore();
         class="layout-item"
         :width="home.leftDrawerOpen ? '68px' : '230px'"
       >
-        <el-card shadow="hover">
-          <HomeMenu />
-        </el-card>
+        <HomeMenu />
       </el-aside>
       <el-container>
         <el-header height="50px">
           <HomeHeader />
         </el-header>
-        <el-main class="layout-item">
-          <el-card
-            style="
-              padding: 8px;
-              width: calc(100% - 18px);
-              height: calc(100% - 18px);
-            "
-            shadow="hover"
-          >
-            <router-view v-slot="{ Component }">
-              <!-- <keep-alive> -->
-              <transition name="slide-fade">
-                <component :is="Component" :key="$route.name" />
-              </transition>
-              <!-- </keep-alive> -->
-            </router-view>
-          </el-card>
+        <el-main class="layout-item main">
+          <router-view v-slot="{ Component }">
+            <!-- <keep-alive> -->
+            <transition name="slide-fade">
+              <component :is="Component" :key="$route.name" />
+            </transition>
+            <!-- </keep-alive> -->
+          </router-view>
         </el-main>
       </el-container>
     </el-container>
@@ -59,6 +48,7 @@ const { home } = useStore();
   margin: 4px;
   border-radius: 4px;
   border: none;
+  background-color: white;
 }
 
 .el-main,
@@ -66,23 +56,14 @@ const { home } = useStore();
   padding: 0px;
 }
 
-.el-card {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
+.main {
+  padding: 8px;
+  overflow: hidden;
 }
 
 .el-main:hover,
 .el-aside:hover {
   transition: all 0.5s;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
-}
-
-::v-deep(.el-card__body) {
-  width: 100%;
-  height: 100%;
-  padding: 0;
 }
 </style>

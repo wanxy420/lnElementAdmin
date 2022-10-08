@@ -45,7 +45,7 @@ let datalist = {
       ],
     },
     {
-      icon: "HelpFilled",
+      icon: "GoodsFilled",
       name: "senior",
       path: "/home/senior",
       component: "",
@@ -56,6 +56,12 @@ let datalist = {
           path: "/home/senior/tableV2",
           component: "senior/tableV2/index",
           title: "虚拟化表格",
+        },
+        {
+          name: "seniorEditTable",
+          path: "/home/senior/editTable",
+          component: "senior/editTable/index",
+          title: "可编辑表格",
         },
       ],
     },

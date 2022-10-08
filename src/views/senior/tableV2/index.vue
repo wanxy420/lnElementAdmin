@@ -30,13 +30,17 @@ const columns = generateColumns(10);
 const data = generateData(columns, 1000);
 </script>
 <template>
-  <el-table-v2
-    :columns="columns"
-    :data="data"
-    :width="1650"
-    :height="900"
-    style="width: 100%; height: 100%"
-  />
+  <el-auto-resizer>
+    <template #default="{ height, width }">
+      <el-table-v2
+        :columns="columns"
+        :data="data"
+        :width="width"
+        :height="height"
+        fixed
+      />
+    </template>
+  </el-auto-resizer>
 </template>
 
 <style lang="less" scoped></style>
