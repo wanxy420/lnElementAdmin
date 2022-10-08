@@ -1,19 +1,8 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { ref, PropType } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
 
 import type { UploadProps, UploadUserFile } from "element-plus";
-
-const fileList = ref<UploadUserFile[]>([
-  {
-    name: "element-plus-logo.svg",
-    url: "https://element-plus.org/images/element-plus-logo.svg",
-  },
-  {
-    name: "element-plus-logo2.svg",
-    url: "https://element-plus.org/images/element-plus-logo.svg",
-  },
-]);
 
 const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
   console.log(file, uploadFiles);
@@ -39,23 +28,50 @@ const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
     () => false
   );
 };
+
+const props = defineProps({
+  modelValue: {
+    type: Array<UploadUserFile>,
+  },
+  // 组件配置
+  config: {
+    type: Object as PropType<lnUploadConfigType>,
+  },
+  // 上传文件请求路径
+  action: {
+    type: String,
+  },
+  // 上传文件请求头
+  headers: {
+    type: Object,
+  },
+  // 上传文件携带的参数
+  data: {
+    type: Object,
+  },
+});
 </script>
 <template>
   <el-upload
-    v-model:file-list="fileList"
+    :show-file-list="props?.config?.showlist"
+    v-model:file-list="props.modelValue"
     class="upload-demo"
-    action="https://run.mocky.io/v3/9d059bf9-4660-45f2-925d-ce80ad6c4d15"
-    multiple
+    :action="props?.action"
+    :multiple="props?.config?.multiple"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
     :before-remove="beforeRemove"
-    :limit="3"
+    :limit="props?.config?.limit || 1"
     :on-exceed="handleExceed"
+    :headers="props?.headers"
+    :data="props?.data"
   >
-    <el-button type="primary">Click to upload</el-button>
+    <slot name="default">
+      <el-button type="primary">点击上传</el-button>
+    </slot>
     <template #tip>
       <div class="el-upload__tip">
-        jpg/png files with a size less than 500KB.
+        {{ props?.config?.tip }}
       </div>
     </template>
   </el-upload>

@@ -15,4 +15,6 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 app.use(router);
 app.use(createPinia());
 app.use(ElementPlus);
-app.mount("#app");
+setTimeout(() => {
+  app.mount("#app");
+}, 500);
