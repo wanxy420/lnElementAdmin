@@ -58,7 +58,6 @@ const { home } = useStore();
   transition: all 0.5s;
   margin: 4px;
   border-radius: 4px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
   border: none;
 }
 

@@ -20,7 +20,6 @@ router.beforeEach((to, from, next) => {
   NProgress.start();
   if (home.isAsyncRouter && to.name !== "login") {
     getRouters().then(() => {
-      console.log(router.getRoutes());
       document.title = to.meta.title as string;
       home.isAsyncRouter = false;
       next({ ...to, replace: true });

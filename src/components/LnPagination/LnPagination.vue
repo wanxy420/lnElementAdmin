@@ -1,14 +1,21 @@
 <script lang="ts" setup>
-import { PropType, ref } from "vue";
+import { PropType } from "vue";
 
+const emit = defineEmits(["handleSizeChange", "handleCurrentChange"]);
 const props = defineProps({
   paginationConfig: {
     type: Object as PropType<lnTableConfig>,
   },
 });
 
-const handleSizeChange = () => {};
-const handleCurrentChange = () => {};
+// 分页组件切换条数
+const handleSizeChange = (e: any) => {
+  emit("handleSizeChange", e);
+};
+// 分页组件切换页数
+const handleCurrentChange = (e: any) => {
+  emit("handleCurrentChange", e);
+};
 </script>
 <template>
   <el-pagination

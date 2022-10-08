@@ -1,6 +1,6 @@
 interface lnTableColumnType {
   // 字段名称 对应列内容的字段名
-  prop: string;
+  prop?: string;
 
   // 列宽度
   width?: string | number | undefined;
@@ -22,6 +22,12 @@ interface lnTableColumnType {
 
   // 列格式化方法
   formatter?: Function | undefined;
+
+  // 当该列数据过长时是否隐藏
+  tooltip?: boolean | undefined;
+
+  // type=selection 的列有效,判断该列是否可多选
+  selectable?: Function | undefined;
 }
 
 interface lnTableConfig {

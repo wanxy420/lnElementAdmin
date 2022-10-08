@@ -1,4 +1,16 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import useStore from "@/store";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const { home } = useStore();
+
+const logOut = () => {
+  localStorage.clear();
+  home.$reset();
+  router.replace("/");
+};
+</script>
 <template>
   <div class="header-right">
     <el-dropdown>
@@ -9,7 +21,7 @@
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item>退出登录</el-dropdown-item>
+          <el-dropdown-item @click.native="logOut">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </template>
     </el-dropdown>

@@ -2,6 +2,7 @@
 import LnTable from "@/components/lnTable/LnTable.vue";
 import { ref } from "vue";
 
+// 表格数据
 const tableData = ref([
   {
     date: "2016-05-03",
@@ -24,7 +25,17 @@ const tableData = ref([
     address: "No. 189, Grove St, Los Angeles",
   },
 ]);
+// 表格列配置项
 const tableColumn = ref<Array<lnTableColumnType>>([
+  {
+    type: "index",
+    label: "序号",
+    width: 70,
+  },
+  {
+    type: "selection",
+    width: 70,
+  },
   {
     prop: "date",
     label: "时间",
@@ -38,12 +49,22 @@ const tableColumn = ref<Array<lnTableColumnType>>([
     label: "地址",
   },
 ]);
+// 表格配置项
 const config = ref<lnTableConfig>({
   isPagination: true,
-  total: 10,
+  total: 50,
   page: 1,
   size: 10,
 });
+
+// 点击切换页数
+const handleCurrentChange = (e: any) => {
+  config.value.page = e;
+};
+// 点击切换条数
+const handleSizeChange = (e: any) => {
+  config.value.size = e;
+};
 </script>
 <template>
   <div class="contant">
@@ -51,6 +72,8 @@ const config = ref<lnTableConfig>({
       :table-data="tableData"
       :table-column="tableColumn"
       :config="config"
+      @handle-current-change="handleCurrentChange"
+      @handle-size-change="handleSizeChange"
     ></ln-table>
   </div>
 </template>
