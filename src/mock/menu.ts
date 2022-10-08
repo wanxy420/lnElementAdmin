@@ -36,6 +36,12 @@ let datalist = {
           component: "pageManage/form/index",
           title: "基础表单",
         },
+        {
+          name: "pageManageUpload",
+          path: "/home/pageManage/upload",
+          component: "pageManage/upload/index",
+          title: "上传组件",
+        },
       ],
     },
     // {
