@@ -9,11 +9,12 @@ const route = useRoute();
 const router = useRouter();
 
 // 点击删除
-const handleClose = (path: string) => {
+const handleClose = (path: string, name: string) => {
   home.headerTabsList.splice(
     home.headerTabsList.findIndex((x) => x.path === path),
     1
   );
+  home.includeList.splice(home.includeList.indexOf(name), 1);
   if (route.path === path) {
     router.push(home.headerTabsList[home.headerTabsList.length - 1].path);
   }
@@ -40,7 +41,7 @@ const isClosable = computed(() => {
     :key="index"
     :type="item.path === route.path ? '' : 'info'"
     @click="handleClick(item.path)"
-    @close="handleClose(item.path)"
+    @close="handleClose(item.path, item.name)"
   >
     {{ item.title }}
   </el-tag>

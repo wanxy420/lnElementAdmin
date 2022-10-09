@@ -13,9 +13,11 @@ watch(
     if (route.meta.isTabs) {
       if (!(home.headerTabsList.findIndex((x) => x.path === route.path) >= 0)) {
         home.headerTabsList.push({
+          name: route.name as string,
           path: route.path,
           title: route.meta.title as string,
         });
+        home.includeList.push(route.name as string);
       }
     }
   },

@@ -4,10 +4,12 @@ interface homeType {
   isAsyncRouter: boolean;
   leftDrawerOpen: boolean;
   headerTabsList: Array<tabsType>;
+  includeList: Array<string>;
   leftMenuList: Array<menuType>;
 }
 
 interface tabsType {
+  name: string;
   path: string;
   title: string;
 }
@@ -18,6 +20,7 @@ const storeHome = defineStore("home", {
       isAsyncRouter: true,
       leftDrawerOpen: false,
       headerTabsList: [],
+      includeList: [],
       leftMenuList: [],
     },
   getters: {},
