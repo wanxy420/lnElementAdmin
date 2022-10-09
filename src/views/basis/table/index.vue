@@ -1,6 +1,11 @@
+<script lang="ts">
+export default {
+  name: "basisTable",
+};
+</script>
 <script lang="ts" setup>
 import LnTable from "@/components/LnTable/LnTable.vue";
-import { ref } from "vue";
+import { ref, onActivated, onMounted } from "vue";
 
 // 表格数据
 const tableData = ref([
@@ -75,6 +80,12 @@ const handleCurrentChange = (e: any) => {
 const handleSizeChange = (e: any) => {
   config.value.size = e;
 };
+onMounted(() => {
+  console.log(111);
+});
+onActivated(() => {
+  console.log(222);
+});
 </script>
 <template>
   <div class="contant">

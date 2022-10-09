@@ -18,6 +18,7 @@ watch(
           title: route.meta.title as string,
         });
         home.includeList.push(route.name as string);
+        console.log("includeList", home.includeList);
       }
     }
   },
