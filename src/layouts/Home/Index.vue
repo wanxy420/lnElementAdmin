@@ -2,6 +2,7 @@
 import HomeMenu from "./HomeLeftMenu/HomeMenu.vue";
 import HomeHeader from "./HomeHeader/HomeHeader.vue";
 import useStore from "@/store";
+import { KeepAlive } from "vue";
 
 const { home } = useStore();
 </script>
@@ -20,11 +21,22 @@ const { home } = useStore();
         </el-header>
         <el-main class="layout-item main">
           <router-view v-slot="{ Component }">
-            <!-- <keep-alive> -->
             <transition name="slide-fade">
-              <component :is="Component" :key="$route.name" />
+              <keep-alive>
+                <component
+                  :is="Component"
+                  :key="$route.name"
+                  v-if="$route.meta.keepAlive"
+                />
+              </keep-alive>
             </transition>
-            <!-- </keep-alive> -->
+            <transition name="slide-fade">
+              <component
+                :is="Component"
+                :key="$route.name"
+                v-if="!$route.meta.keepAlive"
+              />
+            </transition>
           </router-view>
         </el-main>
       </el-container>

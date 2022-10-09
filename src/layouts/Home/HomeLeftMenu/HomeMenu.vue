@@ -10,6 +10,7 @@ const route = useRoute();
   <el-menu
     :collapse="home.leftDrawerOpen"
     router
+    unique-opened
     class="el-menu-vertical-demo"
     :default-active="route.path"
   >

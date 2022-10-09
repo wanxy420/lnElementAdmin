@@ -79,14 +79,19 @@
   </el-form>
 </template>
 
+<script lang="ts">
+export default {
+  name: "basisForm",
+};
+</script>
 <script lang="ts" setup>
-import { reactive, ref } from "vue";
+import { reactive, ref, onActivated, onMounted } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
-const ruleForm = reactive({
-  name: "Hello",
+const ruleForm = ref({
+  name: "",
   region: "",
   count: "",
   date1: "",
@@ -96,6 +101,21 @@ const ruleForm = reactive({
   resource: "",
   desc: "",
 });
+
+onMounted(() => {
+  ruleForm.value = {
+    name: "Hello222",
+    region: "",
+    count: "",
+    date1: "",
+    date2: "",
+    delivery: false,
+    type: [],
+    resource: "",
+    desc: "",
+  };
+});
+onActivated(() => {});
 
 const rules = reactive<FormRules>({
   name: [
