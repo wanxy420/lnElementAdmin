@@ -20,7 +20,7 @@ const handleClose = (path: string, name: string) => {
 };
 // 点击tags
 const handleClick = (path: string) => {
-  router.push(path);
+  if (path !== route.path) router.push(path);
 };
 // 判断是否可删除
 const isClosable = computed(() => {
