@@ -4,7 +4,7 @@ import LoginBackground from "./LoginBackground.vue";
 </script>
 <template>
   <div class="login_container">
-    <LoginBackground />
+    <!-- <LoginBackground /> -->
     <div class="login_view">
       <LoginFrom />
     </div>
