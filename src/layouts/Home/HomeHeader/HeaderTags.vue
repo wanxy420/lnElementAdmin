@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import useStore from "@/store";
-import { tr } from "element-plus/es/locale";
 import { computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 
