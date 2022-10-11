@@ -11,15 +11,24 @@ watch(
   () => route.path,
   () => {
     if (route.meta.isTabs) {
+      // 判断是否打开过该页面，添加对应tags
       if (!(home.headerTabsList.findIndex((x) => x.path === route.path) >= 0)) {
         home.headerTabsList.push({
           name: route.name as string,
           path: route.path,
           title: route.meta.title as string,
         });
+        // 设置缓存页面
         home.includeList.push(route.name as string);
         console.log("includeList", home.includeList);
       }
+      // 滚动到对应tags
+      setTimeout(() => {
+        const tagDom = document.querySelector(`#${route.name as string}`);
+        tagDom?.scrollIntoView({
+          behavior: "smooth",
+        });
+      }, 100);
     }
   },
   {

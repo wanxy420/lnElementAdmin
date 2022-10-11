@@ -41,6 +41,7 @@ const isClosable = computed(() => {
     :type="item.path === route.path ? '' : 'info'"
     @click="handleClick(item.path)"
     @close="handleClose(item.path, item.name)"
+    :id="item.name"
   >
     {{ item.title }}
   </el-tag>
