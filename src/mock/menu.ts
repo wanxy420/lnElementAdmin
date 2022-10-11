@@ -1,5 +1,4 @@
 import Mock from "mockjs";
-const Random = Mock.Random;
 
 Mock.setup({
   //设置请求延时时间

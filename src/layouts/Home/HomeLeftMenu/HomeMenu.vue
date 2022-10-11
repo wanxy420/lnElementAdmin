@@ -30,4 +30,7 @@ const route = useRoute();
 .is-active {
   background-color: rgba(64, 158, 255, 0.2);
 }
+.el-menu--popup {
+  padding: 0;
+}
 </style>
