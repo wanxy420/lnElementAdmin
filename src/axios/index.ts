@@ -5,8 +5,7 @@ import axios, {
   AxiosResponse,
 } from "axios";
 import { ElMessage } from "element-plus";
-import { useRouter } from "vue-router";
-const router = useRouter();
+import router from "@/router/index";
 // 数据返回的接口
 // 定义请求响应参数，不含data
 interface Result {

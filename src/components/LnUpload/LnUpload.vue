@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { PropType } from "vue";
 import { ElMessage, ElMessageBox } from "element-plus";
-
 import type { UploadProps, UploadUserFile } from "element-plus";
 
 const props = defineProps({

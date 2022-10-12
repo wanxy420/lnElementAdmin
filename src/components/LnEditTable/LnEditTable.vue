@@ -1,46 +1,50 @@
 <script lang="ts" setup>
-const tableData = [
-  {
-    date: "2016-05-03",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-02",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-04",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-  {
-    date: "2016-05-01",
-    name: "Tom",
-    address: "No. 189, Grove St, Los Angeles",
-  },
-];
+import { PropType } from "vue";
 
 const props = defineProps({
   // 表格值
   tableData: {
     type: Array,
   },
+  config: {
+    type: Object as PropType<lnEditTableConfig>,
+  },
+  tableColumn: {
+    type: Array<lnEditTableColumnType>,
+    default: () => [],
+  },
 });
 </script>
 <template>
-  <el-table :data="tableData" border style="width: 100%">
-    <el-table-column prop="date" label="Date">
-      <template #default="scope">
-        <el-tag
-          :type="scope.row.date === 'Home' ? '' : 'success'"
-          disable-transitions
-          >{{ scope.row.date }}</el-tag
-        >
-      </template>
-    </el-table-column>
+  <el-table :data="props.tableData" border>
+    <template v-for="(item, index) in props.tableColumn" :key="index">
+      <el-table-column
+        v-if="item?.type === 'index'"
+        type="index"
+        :width="item?.width"
+        :label="item?.label"
+        :align="item?.align || 'center'"
+      />
+      <el-table-column
+        v-else
+        :show-overflow-tooltip="item?.tooltip"
+        :prop="item?.prop"
+        :label="item?.label"
+        :width="item?.width"
+        :align="item?.align || 'center'"
+      >
+        <!-- <template #default="scope">
+          <template v-if="item?.type === 'string'"></template>
+          <template v-else></template>
+        </template> -->
+      </el-table-column>
+    </template>
   </el-table>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.el-table {
+  width: 100%;
+  height: 100%;
+}
+</style>

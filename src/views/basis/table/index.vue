@@ -31,7 +31,7 @@ const tableData = ref([
   },
 ]);
 // 表格列配置项
-const tableColumn = ref<Array<lnTableColumnType>>([
+const tableColumn = ref<lnTableColumnType[]>([
   {
     type: "expand",
     slotName: "expandSlot",
