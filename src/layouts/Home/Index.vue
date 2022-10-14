@@ -22,9 +22,9 @@ const { home } = useStore();
         <el-main class="layout-item main">
           <router-view v-slot="{ Component }">
             <transition name="slide-fade">
-              <keep-alive :include="home.includeList">
+              <KeepAlive :include="home.includeList">
                 <component :is="Component" :key="$route.name" />
-              </keep-alive>
+              </KeepAlive>
             </transition>
           </router-view>
         </el-main>

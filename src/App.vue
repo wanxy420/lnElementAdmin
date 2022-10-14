@@ -20,7 +20,6 @@ watch(
         });
         // 设置缓存页面
         home.includeList.push(route.name as string);
-        console.log("includeList", home.includeList);
       }
       // 滚动到对应tags
       setTimeout(() => {

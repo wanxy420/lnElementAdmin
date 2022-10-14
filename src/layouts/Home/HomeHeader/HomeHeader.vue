@@ -27,6 +27,7 @@ import HeaderTags from "./HeaderTags.vue";
     align-items: center;
     padding: 0 4px;
     overflow: auto;
+    scroll-padding-left: 50%;
   }
 }
 </style>

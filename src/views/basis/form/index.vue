@@ -79,13 +79,8 @@
   </el-form>
 </template>
 
-<script lang="ts">
-export default {
-  name: "basisForm",
-};
-</script>
 <script lang="ts" setup>
-import { reactive, ref, onActivated, onMounted } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 
 const formSize = ref("default");
@@ -115,7 +110,6 @@ onMounted(() => {
     desc: "",
   };
 });
-onActivated(() => {});
 
 const rules = reactive<FormRules>({
   name: [
