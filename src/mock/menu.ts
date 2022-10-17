@@ -62,6 +62,12 @@ let datalist = {
           component: "senior/editTable/index",
           title: "可编辑表格",
         },
+        {
+          name: "seniorLnDialog",
+          path: "/home/senior/lnDialog",
+          component: "senior/lnDialog/lnDialog",
+          title: "内嵌式弹窗",
+        },
       ],
     },
     // {
