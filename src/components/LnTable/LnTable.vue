@@ -2,7 +2,11 @@
 import { PropType } from "vue";
 import LnPagination from "../LnPagination/LnPagination.vue";
 
-const emit = defineEmits(["handleSizeChange", "handleCurrentChange", "select"]);
+const emit = defineEmits([
+  "handleSizeChange",
+  "handleCurrentChange",
+  "handleSelectionChange",
+]);
 const props = defineProps({
   config: {
     type: Object as PropType<lnTableConfig>,
@@ -28,9 +32,9 @@ const handleCurrentChange = (e: any) => {
   emit("handleCurrentChange", e);
 };
 // 获取多选行数据
-const select = (selection: any, row: any) => {
+const handleSelectionChange = (selection: any) => {
+  emit("handleSelectionChange", selection);
   console.log("selection", selection);
-  console.log("row", row);
 };
 </script>
 <template>
@@ -39,12 +43,13 @@ const select = (selection: any, row: any) => {
       :data="props.tableData"
       stripe
       style="width: 100%; flex: 1"
-      @select="select"
+      @selection-change="handleSelectionChange"
     >
       <template v-for="(item, index) in props.tableColumn" :key="index">
         <!-- 插槽列 -->
         <el-table-column
           v-if="item?.type === 'slot'"
+          :fixed="item?.fixed"
           :prop="item.prop"
           :label="item?.label"
           :width="item?.width"
@@ -57,6 +62,7 @@ const select = (selection: any, row: any) => {
         <!-- 下拉列 -->
         <el-table-column
           v-else-if="item?.type === 'expand'"
+          :fixed="item?.fixed"
           :align="item?.align || 'center'"
           type="expand"
         >
@@ -67,6 +73,7 @@ const select = (selection: any, row: any) => {
         <!-- 序号列 -->
         <el-table-column
           v-else-if="item?.type === 'index'"
+          :fixed="item?.fixed"
           type="index"
           :width="item?.width"
           :label="item?.label"
@@ -83,6 +90,7 @@ const select = (selection: any, row: any) => {
         <!-- 其他列 -->
         <el-table-column
           v-else
+          :fixed="item?.fixed"
           :show-overflow-tooltip="item?.tooltip"
           :prop="item?.prop"
           :label="item?.label"
