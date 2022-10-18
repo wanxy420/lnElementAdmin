@@ -1,8 +1,3 @@
-<script lang="ts">
-export default {
-  name: "basisTable",
-};
-</script>
 <script lang="ts" setup>
 import LnTable from "@/components/LnTable/LnTable.vue";
 import { ref, onActivated, onMounted } from "vue";

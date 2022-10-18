@@ -11,9 +11,9 @@ let datalist = {
   data: [
     {
       icon: "Platform",
-      name: "homeDashboard",
+      name: "dashboardPage",
       path: "/home/dashboard",
-      component: "dashboard/index",
+      component: "dashboard/dashboardPage",
       title: "仪表盘",
     },
     {
@@ -24,21 +24,21 @@ let datalist = {
       title: "基础组件",
       children: [
         {
-          name: "basisTable",
+          name: "basisTablePage",
           path: "/home/basis/table",
-          component: "basis/table/index",
+          component: "basis/table/basisTablePage",
           title: "基础表格",
         },
         {
-          name: "basisForm",
+          name: "basisFormPage",
           path: "/home/basis/form",
-          component: "basis/form/index",
+          component: "basis/form/basisFormPage",
           title: "基础表单",
         },
         {
-          name: "basisUpload",
+          name: "basisUploadPage",
           path: "/home/basis/upload",
-          component: "basis/upload/index",
+          component: "basis/upload/basisUploadPage",
           title: "上传组件",
         },
       ],
@@ -51,21 +51,21 @@ let datalist = {
       title: "高级组件",
       children: [
         {
-          name: "seniorTableV2",
+          name: "seniorTableV2Page",
           path: "/home/senior/tableV2",
-          component: "senior/tableV2/index",
+          component: "senior/tableV2/seniorTableV2Page",
           title: "虚拟化表格",
         },
         {
-          name: "seniorEditTable",
+          name: "seniorEditTablePage",
           path: "/home/senior/editTable",
-          component: "senior/editTable/index",
+          component: "senior/editTable/seniorEditTablePage",
           title: "可编辑表格",
         },
         {
-          name: "seniorLnDialog",
+          name: "seniorLnDialogPage",
           path: "/home/senior/lnDialog",
-          component: "senior/lnDialog/lnDialog",
+          component: "senior/lnDialog/seniorLnDialogPage",
           title: "内嵌式弹窗",
         },
       ],
