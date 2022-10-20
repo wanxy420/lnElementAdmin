@@ -6,6 +6,8 @@ import "element-plus/dist/index.css";
 import "./router/permission";
 import { createPinia } from "pinia";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
+import { auth } from "@/directive/auth";
+import { scroll } from "@/directive/scroll";
 
 const app = createApp(App);
 // 引入所有图标
@@ -13,6 +15,8 @@ for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
   app.component(key, component);
 }
 app.use(router);
+app.use(auth);
+app.use(scroll);
 app.use(createPinia());
 app.use(ElementPlus);
 setTimeout(() => {
