@@ -11,7 +11,7 @@ const { home } = useStore();
     <el-container>
       <el-aside
         class="layout-item"
-        :width="home.leftDrawerOpen ? '68px' : '230px'"
+        :width="home.leftDrawerOpen ? '0' : '230px'"
       >
         <HomeMenu />
       </el-aside>
@@ -67,4 +67,6 @@ const { home } = useStore();
   transition: all 0.5s;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
 }
+
+
 </style>

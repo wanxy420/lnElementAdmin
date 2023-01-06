@@ -3,24 +3,23 @@ import { App } from "vue";
 function scroll(app: App) {
   app.directive("lnScroll", {
     mounted(el: any, binding: any) {
-      const wrapper = document.querySelector(el.className);
       const setInter = () => {
         requestAnimationFrame(() => {
-          wrapper.scrollTop += 1;
-          const firstChild = wrapper.children[0];
-          if (wrapper.scrollTop > wrapper.children[0]?.clientHeight) {
-            wrapper.removeChild(wrapper.children[0]);
-            wrapper.appendChild(firstChild);
+          el.scrollTop += 1;
+          const firstChild = el.children[0];
+          if (el.scrollTop > el.children[0]?.clientHeight) {
+            el.removeChild(el.children[0]);
+            el.appendChild(firstChild);
           }
         });
       };
-      binding.timer && clearInterval(binding.timer);
-      binding.timer = setInterval(setInter, binding.time);
-      wrapper.addEventListener("mouseover", () => {
-        binding.timer && clearInterval(binding.timer);
+      binding?.timeout && clearInterval(binding?.timeout);
+      binding.timeout = setInterval(setInter, binding.times);
+      el.addEventListener("mouseover", () => {
+        binding.timeout && clearInterval(binding.timeout);
       });
-      wrapper.addEventListener("mouseout", () => {
-        binding.timer = setInterval(setInter, binding.time);
+      el.addEventListener("mouseout", () => {
+        binding.timeout = setInterval(setInter, binding.times);
       });
     },
   });
