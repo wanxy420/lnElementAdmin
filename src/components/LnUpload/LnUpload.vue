@@ -1,11 +1,28 @@
 <script lang="ts" setup>
-import { PropType } from "vue";
-import { ElMessage, ElMessageBox } from "element-plus";
-import type { UploadProps, UploadUserFile } from "element-plus";
+import { ref, PropType, onMounted } from "vue";
+import type { UploadProps, UploadUserFile, UploadInstance } from "element-plus";
+import { lnMessage } from "src/utils/fun";
+
+interface lnUploadConfigType {
+  // 是否支持多选文件
+  multiple?: boolean | undefined;
+
+  // 上传组件最大上传个数
+  limit?: number | undefined;
+
+  // 上传组件提示文字
+  tip?: string | undefined;
+
+  // 是否显示上传列表
+  showlist?: boolean | undefined;
+
+  // 是否取消自动上传
+  autoUpload?: boolean;
+}
 
 const props = defineProps({
   // 上传文件绑定值
-  modelValue: {
+  fileList: {
     type: Array<UploadUserFile>,
   },
   // 组件配置
@@ -23,6 +40,9 @@ const props = defineProps({
   // 上传文件携带的参数
   data: {
     type: Object,
+    default: () => {
+      return {};
+    },
   },
   // 是否禁用
   disabled: {
@@ -30,9 +50,12 @@ const props = defineProps({
     default: false,
   },
 });
+const emit = defineEmits(["onSuccess", "onRemove", "onError", "onChange"]);
+const uploadRef = ref<UploadInstance>();
+const pageFileList = ref<UploadUserFile[]>([]);
 
 const handleRemove: UploadProps["onRemove"] = (file, uploadFiles) => {
-  console.log(file, uploadFiles);
+  emit("onRemove", file, uploadFiles);
 };
 // 上传列表某项
 const handlePreview: UploadProps["onPreview"] = (uploadFile) => {
@@ -40,47 +63,67 @@ const handlePreview: UploadProps["onPreview"] = (uploadFile) => {
    * 点击列表事件区域
    */
 };
-const handleExceed: UploadProps["onExceed"] = (files, uploadFiles) => {
-  ElMessage.warning(
-    `The limit is 3, you selected ${files.length} files this time, add up to ${
-      files.length + uploadFiles.length
-    } totally`
-  );
-};
-const beforeRemove: UploadProps["beforeRemove"] = (uploadFile, uploadFiles) => {
-  return ElMessageBox.confirm(
-    `Cancel the transfert of ${uploadFile.name} ?`
-  ).then(
-    () => true,
-    () => false
-  );
-};
 // 点击上传文件成功返回
 const onSuccess: UploadProps["onSuccess"] = (
   response,
   uploadFile,
   uploadFiles
-) => {};
+) => {
+  if (response.code != 200) {
+    lnMessage(response.msg, "error");
+  } else {
+    lnMessage(response.msg, "success");
+  }
+  emit("onSuccess", uploadFile, uploadFiles);
+};
+const onExceed: UploadProps["onExceed"] = () => {
+  lnMessage(
+    `当前限制选择 ${
+      props.config?.limit || 1
+    } 个文件，请先删除当前已上传文件后再选择文件上传`,
+    "warning"
+  );
+};
+const submitUpload = () => {
+  uploadRef.value!.submit();
+};
+const onError = () => {
+  emit("onError", "");
+};
+const onChange = () => {
+  emit("onChange", "");
+};
+
+onMounted(() => {
+  pageFileList.value = props.fileList || [];
+});
+
+defineExpose({
+  submitUpload,
+});
 </script>
 <template>
   <el-upload
+    ref="uploadRef"
     :show-file-list="props?.config?.showlist"
-    v-model:file-list="props.modelValue"
+    v-model:file-list="pageFileList"
     class="upload-demo"
     :action="props?.action"
     :multiple="props?.config?.multiple"
     :on-preview="handlePreview"
     :on-remove="handleRemove"
-    :before-remove="beforeRemove"
+    :on-success="onSuccess"
+    :on-exceed="onExceed"
+    :on-error="onError"
+    :on-change="onChange"
     :limit="props?.config?.limit || 1"
-    :on-exceed="handleExceed"
     :headers="props?.headers"
     :data="props?.data"
-    :method="props?.config?.method"
-    :disabled="props?.disabled"
+    :disabled="props.disabled"
+    :auto-upload="props?.config?.autoUpload"
   >
     <slot>
-      <el-button type="primary">点击上传</el-button>
+      <el-button type="primary" v-if="!props.disabled">点击上传</el-button>
     </slot>
     <template #tip>
       <div class="el-upload__tip">
@@ -89,3 +132,16 @@ const onSuccess: UploadProps["onSuccess"] = (
     </template>
   </el-upload>
 </template>
+
+<style lang="scss" scoped>
+.upload-demo {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.el-upload-list {
+  width: 100%;
+}
+</style>
