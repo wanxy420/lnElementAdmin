@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, PropType, onMounted } from "vue";
 import type { UploadProps, UploadUserFile, UploadInstance } from "element-plus";
-import { lnMessage } from "src/utils/fun";
+import { lnMessage } from "@/utils/fun";
 
 interface lnUploadConfigType {
   // 是否支持多选文件
