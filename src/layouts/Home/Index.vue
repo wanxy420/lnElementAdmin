@@ -5,9 +5,14 @@ import useStore from "@/store";
 import { KeepAlive } from "vue";
 
 const { home } = useStore();
+
+const handleClick = () => {
+  home.leftDrawerOpen = !home.leftDrawerOpen;
+};
 </script>
 <template>
   <div class="common-layout">
+    <div class="mask" @click="handleClick" v-if="!home.leftDrawerOpen"></div>
     <el-container>
       <el-aside
         class="layout-item"
@@ -34,6 +39,34 @@ const { home } = useStore();
 </template>
 
 <style lang="less" scoped>
+@media screen and (max-width: 750px) {
+  .el-aside {
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 99;
+    overflow: auto;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .mask {
+    display: block !important;
+    position: fixed;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 90;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+.mask {
+  display: none;
+}
 .common-layout {
   width: 100vw;
   height: 100vh;
