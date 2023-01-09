@@ -29,6 +29,13 @@ const isClosable = computed(() => {
   }
   return false;
 });
+
+const showEffect = (item: any) => {
+  if (item.path === route.path) {
+    return "dark";
+  }
+  return "light";
+};
 </script>
 <template>
   <el-tag
@@ -36,7 +43,7 @@ const isClosable = computed(() => {
     class="mx-1"
     size="large"
     :closable="isClosable"
-    :effect="item.path === route.path ? 'dark' : ''"
+    :effect="showEffect(item)"
     :key="index"
     @click="handleClick(item.path)"
     @close="handleClose(item.path, item.name)"

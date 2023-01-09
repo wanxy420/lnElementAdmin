@@ -46,27 +46,26 @@ watch(
 <template>
   <div v-if="modelValue" id="ln-dialog">
     <div id="mask" @click="handleClose"></div>
-    <transition name="el-zoom-in-center">
-      <div
-        v-if="modelValue"
-        class="ln-dialog-content"
-        :style="{
-          width: props.width,
-          height: props.height,
-          marginTop: `${props.top}px`,
-        }"
-      >
-        <div class="content-header">
-          <span>{{ props.title }}</span>
-          <el-icon @click="handleClose" class="header-close" :size="21">
-            <Close />
-          </el-icon>
-        </div>
-        <div class="content-body">
-          <slot></slot>
-        </div>
+    <div
+      v-ln-drag
+      v-if="modelValue"
+      class="ln-dialog-content"
+      :style="{
+        width: props.width,
+        height: props.height,
+        marginTop: `${props.top}px`,
+      }"
+    >
+      <div class="content-header">
+        <span>{{ props.title }}</span>
+        <el-icon @click="handleClose" class="header-close" :size="21">
+          <Close />
+        </el-icon>
       </div>
-    </transition>
+      <div class="content-body">
+        <slot></slot>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -91,7 +90,6 @@ watch(
     top: 0;
   }
   .ln-dialog-content {
-    transition: 300ms;
     position: absolute;
     background-color: white;
     border-radius: @borderRadius;
@@ -110,7 +108,6 @@ watch(
       color: #6e6e6e;
       border-radius: @borderRadius @borderRadius 0 0;
       .header-close {
-        transition: 300ms;
         cursor: pointer;
         border-radius: 50%;
       }

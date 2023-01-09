@@ -67,6 +67,4 @@ const { home } = useStore();
   transition: all 0.5s;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.3);
 }
-
-
 </style>
