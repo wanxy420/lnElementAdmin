@@ -70,9 +70,17 @@ watch(
 </template>
 
 <style lang="less" scoped>
+@media screen and (max-width: 750px) {
+  .ln-dialog-content {
+    width: 100% !important;
+    height: 100% !important;
+    margin-top: 0 !important;
+    border-radius: 0 !important;
+  }
+}
 @borderRadius: 4px;
 #ln-dialog {
-  width: 100%;
+  width: calc(100% - 16px);
   height: 100%;
   display: flex;
   position: absolute;
@@ -80,7 +88,6 @@ watch(
   top: 0;
   justify-content: center;
   z-index: 10;
-  overflow: auto;
   #mask {
     width: 100%;
     height: 100%;

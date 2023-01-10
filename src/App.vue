@@ -36,6 +36,11 @@ watch(
   }
 );
 
+if (document.body.clientWidth > 750) {
+  config.isMobile = false;
+} else {
+  config.isMobile = true;
+}
 window.addEventListener("resize", () => {
   if (document.body.clientWidth > 750) {
     config.isMobile = false;

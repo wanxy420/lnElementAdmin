@@ -24,7 +24,7 @@ const handleCurrentChange = (e: any) => {
     :page-sizes="[10, 15, 30, 50]"
     small
     background
-    layout="total, prev, pager, next, sizes"
+    layout="prev, pager, next, sizes"
     :total="props.paginationConfig?.total"
     @size-change="handleSizeChange"
     @current-change="handleCurrentChange"

@@ -24,6 +24,16 @@ const tableData = ref([
     name: "Tom",
     address: "No. 189, Grove St, Los Angeles",
   },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-01",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
 ]);
 // 表格列配置项
 const tableColumn = ref<lnTableColumnType[]>([
@@ -45,10 +55,12 @@ const tableColumn = ref<lnTableColumnType[]>([
     slotName: "dateTags",
     prop: "date",
     label: "插槽",
+    columnPostion: "titleRight",
   },
   {
     prop: "date",
     label: "时间",
+    columnPostion: "titleLeft",
   },
   {
     prop: "name",
@@ -105,5 +117,6 @@ onActivated(() => {
 .contant {
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 </style>

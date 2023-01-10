@@ -2,13 +2,28 @@
 import HomeMenu from "./HomeLeftMenu/HomeMenu.vue";
 import HomeHeader from "./HomeHeader/HomeHeader.vue";
 import useStore from "@/store";
-import { KeepAlive } from "vue";
+import { KeepAlive, watch } from "vue";
 
-const { home } = useStore();
+const { home, config } = useStore();
 
 const handleClick = () => {
   home.leftDrawerOpen = !home.leftDrawerOpen;
 };
+
+if (config.isMobile) {
+  home.leftDrawerOpen = true;
+}
+
+watch(
+  () => home.leftDrawerOpen,
+  () => {
+    console.log(home.leftDrawerOpen);
+  },
+  {
+    deep: true,
+    immediate: true,
+  }
+);
 </script>
 <template>
   <div class="common-layout">
@@ -61,6 +76,12 @@ const handleClick = () => {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .main {
+    background-color: rgb(245, 245, 245) !important;
   }
 }
 
