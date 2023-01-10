@@ -8,7 +8,6 @@ const route = useRoute();
 </script>
 <template>
   <div class="menu-content">
-    11
     <el-menu
       :collapse="home.leftDrawerOpen"
       router
