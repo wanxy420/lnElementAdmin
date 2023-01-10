@@ -79,8 +79,6 @@ watch(
   }
 }
 
-
-
 .mask {
   display: none;
 }

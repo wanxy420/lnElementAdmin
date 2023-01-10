@@ -87,12 +87,6 @@ const handleCurrentChange = (e: any) => {
 const handleSizeChange = (e: any) => {
   config.value.size = e;
 };
-onMounted(() => {
-  console.log(111);
-});
-onActivated(() => {
-  console.log(222);
-});
 
 const scrollLoad = () => {
   tableData.value = [...tableData.value, ...tableData.value];

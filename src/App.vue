@@ -21,13 +21,14 @@ watch(
         // 设置缓存页面
         home.includeList.push(route.name as string);
       }
+      if (config.isMobile) home.leftDrawerOpen = true;
       // 滚动到对应tags
       setTimeout(() => {
         const tagDom = document.querySelector(`#${route.name as string}`);
         tagDom?.scrollIntoView({
           behavior: "smooth",
         });
-      }, 100);
+      }, 200);
     }
   },
   {

@@ -56,6 +56,6 @@ const showEffect = (item: any) => {
 <style lang="less" scoped>
 .mx-1 {
   cursor: pointer;
-  margin-right: 8px;
+  margin-right: 15px;
 }
 </style>
