@@ -72,15 +72,16 @@ watch(
 <style lang="less" scoped>
 @media screen and (max-width: 750px) {
   .ln-dialog-content {
-    width: 100% !important;
-    height: 100% !important;
-    margin-top: 0 !important;
+    width: calc(100vw - 16px) !important;
+    height: calc(100vh) !important;
+    margin-top: -8px !important;
+    margin-left: -16px !important;
     border-radius: 0 !important;
   }
 }
 @borderRadius: 4px;
 #ln-dialog {
-  width: calc(100% - 16px);
+  width: 100%;
   height: 100%;
   display: flex;
   position: absolute;
