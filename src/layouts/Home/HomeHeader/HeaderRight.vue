@@ -30,8 +30,7 @@ const logOut = () => {
 
 <style lang="less" scoped>
 .header-right {
-  margin: 0 4px;
-  padding: 0 8px;
+  padding: 5px;
   background-color: white;
   height: 40px;
   display: flex;

@@ -79,11 +79,7 @@ watch(
   }
 }
 
-@media screen and (max-width: 750px) {
-  .main {
-    background-color: rgb(245, 245, 245) !important;
-  }
-}
+
 
 .mask {
   display: none;

@@ -74,4 +74,10 @@ window.addEventListener("resize", () => {
   transform: translateX(20px);
   opacity: 0;
 }
+
+@media screen and (max-width: 750px) {
+  .el-form-item {
+    display: block !important;
+  }
+}
 </style>

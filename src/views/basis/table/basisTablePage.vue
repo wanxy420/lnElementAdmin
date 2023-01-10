@@ -93,6 +93,10 @@ onMounted(() => {
 onActivated(() => {
   console.log(222);
 });
+
+const scrollLoad = () => {
+  tableData.value = [...tableData.value, ...tableData.value];
+};
 </script>
 <template>
   <div class="contant">
@@ -102,6 +106,7 @@ onActivated(() => {
       :config="config"
       @handle-current-change="handleCurrentChange"
       @handle-size-change="handleSizeChange"
+      @scroll-load="scrollLoad"
     >
       <template #dateTags="row">
         <el-tag>{{ row.row.date }}</el-tag>

@@ -8,6 +8,7 @@ const emit = defineEmits([
   "handleSizeChange",
   "handleCurrentChange",
   "handleSelectionChange",
+  "scrollLoad",
 ]);
 const props = defineProps({
   config: {
@@ -44,6 +45,13 @@ const getPropsName = (val: string): string => {
   let index = props.tableColumn.findIndex((x) => x.columnPostion === val);
   if (index >= 0) return props.tableColumn[index]?.prop || "";
   else return props.tableColumn[0]?.prop || "";
+};
+
+// 手机端情况下触底加载更多
+const load = () => {
+  if (config.isMobile) {
+    emit("scrollLoad");
+  }
 };
 </script>
 <template>
@@ -118,35 +126,40 @@ const getPropsName = (val: string): string => {
       </div>
     </template>
     <template v-else>
-      <el-card
-        shadow="hover"
-        v-for="(item, index) in props.tableData"
-        style="margin: 4px 0; height: auto"
-        :key="index"
+      <div
+        v-infinite-scroll="load"
+        style="overflow: auto; width: 100%; height: 100%"
       >
-        <template #header>
-          <div style="display: flex; justify-content: space-between">
-            <span>{{ item[getPropsName("titleLeft")] }}</span>
-            <span>{{ item[getPropsName("titleRight")] }}</span>
-          </div>
-        </template>
-        <template v-for="(itemC, indexC) in props.tableColumn">
-          <div :key="indexC" v-if="!itemC?.columnPostion && item">
-            <template v-if="itemC.type === 'slot'">
-              <span>{{ itemC?.label }}:</span>
-              <span style="margin-left: 8px">
-                <slot :name="itemC?.slotName" :row="item"></slot>
-              </span>
-            </template>
-            <template v-else-if="!itemC.type">
-              <span>{{ itemC?.label }}:</span>
-              <span style="margin-left: 8px">
-                {{ item[`${itemC.prop}`] }}
-              </span>
-            </template>
-          </div>
-        </template>
-      </el-card>
+        <el-card
+          shadow="hover"
+          v-for="(item, index) in props.tableData"
+          style="margin: 4px 0; height: auto"
+          :key="index"
+        >
+          <template #header>
+            <div style="display: flex; justify-content: space-between">
+              <span>{{ item[getPropsName("titleLeft")] }}</span>
+              <span>{{ item[getPropsName("titleRight")] }}</span>
+            </div>
+          </template>
+          <template v-for="(itemC, indexC) in props.tableColumn">
+            <div :key="indexC" v-if="!itemC?.columnPostion && item">
+              <template v-if="itemC.type === 'slot'">
+                <span>{{ itemC?.label }}:</span>
+                <span style="margin-left: 8px">
+                  <slot :name="itemC?.slotName" :row="item"></slot>
+                </span>
+              </template>
+              <template v-else-if="!itemC.type">
+                <span>{{ itemC?.label }}:</span>
+                <span style="margin-left: 8px">
+                  {{ item[`${itemC.prop}`] }}
+                </span>
+              </template>
+            </div>
+          </template>
+        </el-card>
+      </div>
     </template>
   </div>
 </template>
@@ -158,6 +171,8 @@ const getPropsName = (val: string): string => {
   transition: all 0.5s;
   overflow-x: hidden;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
   .table-foot {
     width: 100%;
     padding: 8px 0;
