@@ -27,7 +27,7 @@ router.beforeEach((to, from, next) => {
   } else {
     if (to.path === "/home") {
       document.title = to.meta.title as string;
-      next({ path: getFirstMenu(home.leftMenuList) });
+      next({ path: getFirstMenu(home.leftMenuList), replace: true });
     }
     document.title = to.meta.title as string;
     next();
