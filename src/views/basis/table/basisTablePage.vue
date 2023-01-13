@@ -1,6 +1,7 @@
 <script lang="ts" setup>
+import LnCard from "@/components/lnCard/LnCard.vue";
 import LnTable from "@/components/LnTable/LnTable.vue";
-import { ref, onActivated, onMounted } from "vue";
+import { ref } from "vue";
 
 // 表格数据
 const tableData = ref([
@@ -40,12 +41,10 @@ const tableColumn = ref<lnTableColumnType[]>([
     slotName: "dateTags",
     prop: "date",
     label: "插槽",
-    columnPostion: "titleRight",
   },
   {
     prop: "date",
     label: "时间",
-    columnPostion: "titleLeft",
   },
   {
     prop: "name",
@@ -54,6 +53,12 @@ const tableColumn = ref<lnTableColumnType[]>([
   {
     prop: "address",
     label: "地址",
+  },
+  {
+    width: 200,
+    type: "slot",
+    slotName: "operationSlot",
+    label: "操作",
   },
 ]);
 // 表格配置项
@@ -92,6 +97,33 @@ const scrollLoad = () => {
       </template>
       <template #expandSlot="row">
         <el-tag>{{ row.row.date }}</el-tag>
+      </template>
+      <template #operationSlot="row">
+        <div style="display: flex; justify-content: space-around; width: 100%">
+          <el-link type="primary">详情</el-link>
+          <el-link type="primary">修改</el-link>
+          <el-link type="danger">删除</el-link>
+        </div>
+      </template>
+      <template #card="row">
+        <ln-card>
+          <template #titleLeft>{{ row.row.name }}</template>
+          <template #titleRight>
+            <el-tag>{{ row.row.date }}</el-tag>
+          </template>
+          <template #body>
+            <div>地址: {{ row.row.address }}</div>
+          </template>
+          <template #bottom>
+            <div
+              style="display: flex; justify-content: space-around; width: 100%"
+            >
+              <el-link type="primary">详情</el-link>
+              <el-link type="primary">修改</el-link>
+              <el-link type="danger">删除</el-link>
+            </div>
+          </template>
+        </ln-card>
       </template>
     </ln-table>
   </div>
