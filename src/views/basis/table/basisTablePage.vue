@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import LnTable from "@/components/LnTable/LnTable.vue";
 import LnCard from "@/components/LnCard/LnCard.vue";
-import { ref, onActivated, onMounted } from "vue";
+import { ref } from "vue";
 
 const tableRef = ref<any>();
 // 表格数据
@@ -103,8 +103,8 @@ const tableColumn = ref<lnTableColumnType[]>([
   {
     width: 200,
     type: "slot",
-    slotName: "operation",
     prop: "date",
+    slotName: "operationSlot",
     label: "操作",
   },
 ]);
@@ -171,8 +171,9 @@ const pullLoad = () => {
       <template #expandSlot="row">
         <el-tag>{{ row.row.date }}</el-tag>
       </template>
-      <template #operation="row">
-        <div style="display: flex; justify-content: space-around">
+      =======
+      <template #operationSlot="row">
+        <div style="display: flex; justify-content: space-around; width: 100%">
           <el-link type="primary">详情</el-link>
           <el-link type="primary">修改</el-link>
           <el-link type="danger">删除</el-link>
@@ -181,10 +182,16 @@ const pullLoad = () => {
       <template #card="row">
         <ln-card>
           <template #titleLeft>{{ row.row.name }}</template>
-          <template #titleRight>{{ row.row.date }}</template>
-          <template #body> 地址{{ row.row.address }}</template>
+          <template #titleRight>
+            <el-tag>{{ row.row.date }}</el-tag>
+          </template>
+          <template #body>
+            <div>地址: {{ row.row.address }}</div>
+          </template>
           <template #bottom>
-            <div style="display: flex; justify-content: space-around">
+            <div
+              style="display: flex; justify-content: space-around; width: 100%"
+            >
               <el-link type="primary">详情</el-link>
               <el-link type="primary">修改</el-link>
               <el-link type="danger">删除</el-link>

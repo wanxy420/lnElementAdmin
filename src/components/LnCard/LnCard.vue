@@ -1,6 +1,6 @@
 <template>
   <div class="ln-card-content">
-    <div class="ln-card-header">
+    <div class="ln-card-header" v-if="slotTitle">
       <span class="ln-card-header-left">
         <slot name="titleLeft"></slot>
       </span>
@@ -8,10 +8,10 @@
         <slot name="titleRight"></slot>
       </span>
     </div>
-    <div class="ln-card-body">
+    <div class="ln-card-body" v-if="slotBody">
       <slot name="body"></slot>
     </div>
-    <div class="ln-card-bottom">
+    <div class="ln-card-bottom" v-if="slotBottom">
       <slot name="bottom"></slot>
     </div>
   </div>
@@ -20,6 +20,7 @@
 <script lang="ts" setup>
 import { useSlots } from "vue";
 
+//判断<slot name="test"/>是否有传值
 const slotTitle = !!useSlots().titleLeft || !!useSlots().titleRight;
 const slotBody = !!useSlots().body;
 const slotBottom = !!useSlots().bottom;
