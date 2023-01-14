@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 import LnPagination from "../LnPagination/LnPagination.vue";
+import LnScrollList from "../LnScrollList/LnScrollList.vue";
 import useStore from "@/store";
 
 const { config } = useStore();
@@ -9,7 +10,9 @@ const emit = defineEmits([
   "handleCurrentChange",
   "handleSelectionChange",
   "scrollLoad",
+  "pullLoad",
 ]);
+
 const props = defineProps({
   config: {
     type: Object as PropType<lnTableConfig>,
@@ -23,6 +26,7 @@ const props = defineProps({
     default: () => [],
   },
 });
+const lnScrollListRef = ref<any>();
 
 // 分页组件切换条数
 const handleSizeChange = (e: any) => {
@@ -40,19 +44,24 @@ const handleSelectionChange = (selection: any) => {
   console.log("selection", selection);
 };
 
-// 获取对应列名
-const getPropsName = (val: string): string => {
-  let index = props.tableColumn.findIndex((x) => x.columnPostion === val);
-  if (index >= 0) return props.tableColumn[index]?.prop || "";
-  else return props.tableColumn[0]?.prop || "";
-};
-
 // 手机端情况下触底加载更多
 const load = () => {
   if (config.isMobile) {
     emit("scrollLoad");
   }
 };
+
+const pullLoad = () => {
+  emit("pullLoad");
+};
+
+const hidePull = () => {
+  lnScrollListRef.value.hidePull();
+};
+
+defineExpose({
+  hidePull,
+});
 </script>
 <template>
   <div class="table-content">
@@ -126,40 +135,15 @@ const load = () => {
       </div>
     </template>
     <template v-else>
-      <div
-        v-infinite-scroll="load"
-        style="overflow: auto; width: 100%; height: 100%"
+      <ln-scroll-list
+        @scroll-load="load"
+        @pull-load="pullLoad"
+        ref="lnScrollListRef"
       >
-        <el-card
-          shadow="hover"
-          v-for="(item, index) in props.tableData"
-          style="margin: 4px 0; height: auto"
-          :key="index"
-        >
-          <template #header>
-            <div style="display: flex; justify-content: space-between">
-              <span>{{ item[getPropsName("titleLeft")] }}</span>
-              <span>{{ item[getPropsName("titleRight")] }}</span>
-            </div>
-          </template>
-          <template v-for="(itemC, indexC) in props.tableColumn">
-            <div :key="indexC" v-if="!itemC?.columnPostion && item">
-              <template v-if="itemC.type === 'slot'">
-                <span>{{ itemC?.label }}:</span>
-                <span style="margin-left: 8px">
-                  <slot :name="itemC?.slotName" :row="item"></slot>
-                </span>
-              </template>
-              <template v-else-if="!itemC.type">
-                <span>{{ itemC?.label }}:</span>
-                <span style="margin-left: 8px">
-                  {{ item[`${itemC.prop}`] }}
-                </span>
-              </template>
-            </div>
-          </template>
-        </el-card>
-      </div>
+        <template v-for="(item, index) in tableData">
+          <slot name="card" :row="item"></slot>
+        </template>
+      </ln-scroll-list>
     </template>
   </div>
 </template>

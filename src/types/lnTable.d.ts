@@ -28,9 +28,6 @@ interface lnTableColumnType {
 
   // type=selection 的列有效,判断该列是否可多选
   selectable?: Function | undefined;
-
-  // 手机模式下该列的位置
-  columnPostion?: "titleLeft" | "titleRight" | "bottom";
 }
 
 interface lnEditTableColumnType {
