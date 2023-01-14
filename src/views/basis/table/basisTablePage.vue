@@ -171,7 +171,6 @@ const pullLoad = () => {
       <template #expandSlot="row">
         <el-tag>{{ row.row.date }}</el-tag>
       </template>
-      =======
       <template #operationSlot="row">
         <div style="display: flex; justify-content: space-around; width: 100%">
           <el-link type="primary">详情</el-link>
