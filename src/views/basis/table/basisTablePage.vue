@@ -1,10 +1,56 @@
 <script lang="ts" setup>
-import LnCard from "@/components/lnCard/LnCard.vue";
 import LnTable from "@/components/LnTable/LnTable.vue";
+import LnCard from "@/components/LnCard/LnCard.vue";
 import { ref } from "vue";
 
+const tableRef = ref<any>();
 // 表格数据
 const tableData = ref([
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-04",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-04",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-03",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-02",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
+  {
+    date: "2016-05-04",
+    name: "Tom",
+    address: "No. 189, Grove St, Los Angeles",
+  },
   {
     date: "2016-05-03",
     name: "Tom",
@@ -57,6 +103,7 @@ const tableColumn = ref<lnTableColumnType[]>([
   {
     width: 200,
     type: "slot",
+    prop: "date",
     slotName: "operationSlot",
     label: "操作",
   },
@@ -81,6 +128,30 @@ const handleSizeChange = (e: any) => {
 const scrollLoad = () => {
   tableData.value = [...tableData.value, ...tableData.value];
 };
+
+const pullLoad = () => {
+  tableData.value = [
+    {
+      date: "2016-05-03",
+      name: "Tom",
+      address: "No. 189, Grove St, Los Angeles",
+    },
+    {
+      date: "2016-05-02",
+      name: "Tom",
+      address: "No. 189, Grove St, Los Angeles",
+    },
+    {
+      date: "2016-05-04",
+      name: "Tom",
+      address: "No. 189, Grove St, Los Angeles",
+    },
+  ];
+  setTimeout(() => {
+    console.log(tableRef.value);
+    tableRef.value.hidePull();
+  }, 1000);
+};
 </script>
 <template>
   <div class="contant">
@@ -91,6 +162,8 @@ const scrollLoad = () => {
       @handle-current-change="handleCurrentChange"
       @handle-size-change="handleSizeChange"
       @scroll-load="scrollLoad"
+      @pull-load="pullLoad"
+      ref="tableRef"
     >
       <template #dateTags="row">
         <el-tag>{{ row.row.date }}</el-tag>

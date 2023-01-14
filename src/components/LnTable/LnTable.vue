@@ -1,6 +1,7 @@
 <script lang="ts" setup>
-import { PropType } from "vue";
+import { PropType, ref } from "vue";
 import LnPagination from "../LnPagination/LnPagination.vue";
+import LnScrollList from "../LnScrollList/LnScrollList.vue";
 import useStore from "@/store";
 
 const { config } = useStore();
@@ -9,7 +10,9 @@ const emit = defineEmits([
   "handleCurrentChange",
   "handleSelectionChange",
   "scrollLoad",
+  "pullLoad",
 ]);
+
 const props = defineProps({
   config: {
     type: Object as PropType<lnTableConfig>,
@@ -23,6 +26,7 @@ const props = defineProps({
     default: () => [],
   },
 });
+const lnScrollListRef = ref<any>();
 
 // 分页组件切换条数
 const handleSizeChange = (e: any) => {
@@ -46,6 +50,18 @@ const load = () => {
     emit("scrollLoad");
   }
 };
+
+const pullLoad = () => {
+  emit("pullLoad");
+};
+
+const hidePull = () => {
+  lnScrollListRef.value.hidePull();
+};
+
+defineExpose({
+  hidePull,
+});
 </script>
 <template>
   <div class="table-content">
@@ -119,16 +135,15 @@ const load = () => {
       </div>
     </template>
     <template v-else>
-      <div
-        v-infinite-scroll="load"
-        :infinite-scroll-distance="20"
-        :infinite-scroll-immediate="false"
-        style="overflow-y: auto; width: 100%; height: 100%"
+      <ln-scroll-list
+        @scroll-load="load"
+        @pull-load="pullLoad"
+        ref="lnScrollListRef"
       >
         <template v-for="(item, index) in tableData">
           <slot name="card" :row="item"></slot>
         </template>
-      </div>
+      </ln-scroll-list>
     </template>
   </div>
 </template>

@@ -44,10 +44,16 @@ const slotBottom = !!useSlots().bottom;
     .ln-card-header-left {
       font-size: 16px;
       font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .ln-card-header-right {
       font-size: 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
