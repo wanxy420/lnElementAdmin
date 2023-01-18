@@ -19,6 +19,7 @@
 
 <script lang="ts" setup>
 import useStore from "@/store";
+import { isUndefined } from "lodash";
 import { ref, defineExpose } from "vue";
 
 const { config } = useStore();
@@ -37,10 +38,12 @@ const load = () => {
 };
 
 const onTouchstart = (e: TouchEvent) => {
-  disy = e.changedTouches[0].pageY - y;
-  getbox().style.transition = `none`;
-  document.ontouchmove = fnmove;
-  document.ontouchend = fnend;
+  if (config.isMobile) {
+    disy = e.changedTouches[0].pageY - y;
+    getbox().style.transition = `none`;
+    if (!isUndefined(document.ontouchmove)) document.ontouchmove = fnmove;
+    if (!isUndefined(document.ontouchend)) document.ontouchend = fnend;
+  }
 };
 
 const fnmove = (e: TouchEvent) => {

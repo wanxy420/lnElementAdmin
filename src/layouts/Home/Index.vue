@@ -42,10 +42,7 @@ watch(
         <el-main class="layout-item main">
           <router-view v-slot="{ Component }">
             <transition name="slide-fade">
-              <KeepAlive
-                :include="home.includeList"
-                :key="($route.name as string)"
-              >
+              <KeepAlive :include="home.includeList">
                 <component :is="Component" :key="$route.name" />
               </KeepAlive>
             </transition>
