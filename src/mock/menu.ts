@@ -56,12 +56,12 @@ let datalist = {
           component: "senior/tableV2/seniorTableV2Page",
           title: "虚拟化表格",
         },
-        {
-          name: "seniorEditTablePage",
-          path: "/home/senior/editTable",
-          component: "senior/editTable/seniorEditTablePage",
-          title: "可编辑表格",
-        },
+        // {
+        //   name: "seniorEditTablePage",
+        //   path: "/home/senior/editTable",
+        //   component: "senior/editTable/seniorEditTablePage",
+        //   title: "可编辑表格",
+        // },
         {
           name: "seniorLnDialogPage",
           path: "/home/senior/lnDialog",
