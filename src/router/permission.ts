@@ -61,6 +61,7 @@ const getRouters = () => {
       data.forEach((item: any) => {
         router.addRoute("home", item);
       });
+      console.log(router.getRoutes());
       // 返回成功
       resolve(11);
     });

@@ -84,6 +84,12 @@ const closeTagsData = (type: string) => {
     padding: 0 4px;
     overflow: auto;
     scroll-padding-left: 50%;
+    scrollbar-width: none; /* firefox */
+    -ms-overflow-style: none; /* IE 10+ */
+  }
+
+  .header-center::-webkit-scrollbar {
+    display: none; /* Chrome Safari */
   }
 }
 </style>
