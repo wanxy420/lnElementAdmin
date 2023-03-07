@@ -1,28 +1,31 @@
 <template>
   <div class="ln-scroll-list">
     <div class="ln-scroll-pull" ref="boxs">
-      <svg viewBox="25 25 50 50">
-        <circle r="20" cy="50" cx="50"></circle>
-      </svg>
+      <div class="loader">下拉刷新页面...</div>
     </div>
     <div
       @touchstart="onTouchstart"
-      class="ln-scroll-body"
+      class="ln-scroll-body hide-scrollbar"
+      id="ln-scroll-body"
       v-infinite-scroll="load"
       :infinite-scroll-distance="20"
       :infinite-scroll-immediate="false"
     >
       <slot></slot>
+      <el-backtop :visibility-height="50" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import useStore from "@/store";
 import { isUndefined } from "lodash";
-import { ref, defineExpose } from "vue";
-
+import { ref } from "vue";
+import useStore from "@/store";
 const { config } = useStore();
+
+// 判断刷新页面
+const isRefresh = ref<boolean>(true);
+
 const emit = defineEmits(["scrollLoad", "pullLoad"]);
 let disy: number = 0;
 let y: number = 0;
@@ -47,16 +50,34 @@ const onTouchstart = (e: TouchEvent) => {
 };
 
 const fnmove = (e: TouchEvent) => {
-  y = e.changedTouches[0].pageY - disy;
-  getbox().style.height = y / 3 + "px";
+  const body = document.getElementById("ln-scroll-body");
+  if (body?.scrollTop === 0) {
+    if (isRefresh.value) {
+      y = e.changedTouches[0].pageY - disy;
+      getbox().style.height = y / 3 + "px";
+    }
+  } else {
+    if (isRefresh.value) {
+      isRefresh.value = false;
+    }
+  }
 };
 const fnend = (e: TouchEvent) => {
+  const body = document.getElementById("ln-scroll-body");
+  if (body?.scrollTop === 0) {
+    if (!isRefresh.value) {
+      y = 0;
+      isRefresh.value = true;
+    }
+  }
   getbox().style.transition = `0.3s sase height`;
-  if (y > 50) {
+  if (y > 200) {
     y = 50;
     emit("pullLoad");
+    getbox().style.height = y + "px";
+  } else {
+    getbox().style.height = "0px";
   }
-  getbox().style.height = y + "px";
   document.ontouchmove = null;
   document.ontouchend = null;
 };
@@ -69,7 +90,7 @@ defineExpose({
   hidePull,
 });
 </script>
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .ln-scroll-list {
   width: 100%;
   height: 100%;
@@ -88,44 +109,29 @@ defineExpose({
     overflow: hidden;
     display: flex;
     justify-content: center;
+    align-items: center;
+    background-color: #e7e7e7;
   }
 }
 
-svg {
-  width: 50px;
-  transform-origin: center;
-  animation: rotate4 2s linear infinite;
-}
-
-circle {
-  fill: none;
-  stroke: hsl(214, 97%, 59%);
-  stroke-width: 2;
-  stroke-dasharray: 1, 200;
-  stroke-dashoffset: 0;
-  stroke-linecap: round;
-  animation: dash4 1.5s ease-in-out infinite;
-}
-
-@keyframes rotate4 {
+@keyframes animate8345 {
+  0%,
   100% {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes dash4 {
-  0% {
-    stroke-dasharray: 1, 200;
-    stroke-dashoffset: 0;
+    filter: hue-rotate(0deg);
   }
 
   50% {
-    stroke-dasharray: 90, 200;
-    stroke-dashoffset: -35px;
+    filter: hue-rotate(360deg);
   }
+}
 
-  100% {
-    stroke-dashoffset: -125px;
-  }
+.loader {
+  color: rgb(0, 0, 0);
+  background: linear-gradient(to right, #2d60ec, #3ccfda);
+  font-size: 16px;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  animation: animate8345 9s linear infinite;
+  font-weight: bold;
 }
 </style>

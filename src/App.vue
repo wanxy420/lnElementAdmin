@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { watch } from "vue";
-import useStore from "./store";
+import useStore from "@/store";
 import { useRoute } from "vue-router";
 import zhCn from "element-plus/dist/locale/zh-cn.mjs";
 
